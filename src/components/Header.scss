@@ -1,21 +1,4 @@
-@use "../styles/variables.scss" as _v;
-
 header {
   display: flex;
   justify-content: space-between;
-}
-
-.btn {
-  background-color: _v.$primary;
-  border-radius: _v.$btn-radious;
-  border-width: _v.$btn-border-width;
-  color: _v.$base-color;
-  padding: 5px 10px;
-  margin: 2px;
-  font-size: 0.8rem;
-
-  &.secondary {
-    background-color: _v.$secondary;
-    color: _v.$base-dark;
-  }
 }

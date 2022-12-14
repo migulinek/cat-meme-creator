@@ -1,14 +1,18 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
     <header>
-      <img src="/logo.png" alt="" />
+      <Link to="/">
+        <img src="/logo.png" alt="" />
+      </Link>
       <div className="buttons">
-        <a href="#">
+        <Link to="login">
           <button className="btn">Sign in</button>
-        </a>
-        <a href="#">
+        </Link>
+        <Link to="memes">
           <button className="btn secondary">Memes</button>
-        </a>
+        </Link>
       </div>
     </header>
   );
