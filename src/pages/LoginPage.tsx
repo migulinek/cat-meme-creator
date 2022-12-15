@@ -1,13 +1,16 @@
-import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
-import { ReactReduxContext } from "react-redux";
-import { MutableRefObject, useContext, useRef } from "react";
+import { useAppDispatch } from "../hooks/redux-hooks";
+import { MutableRefObject, useRef, useState } from "react";
 import { authUser } from "../store/user/userActions";
+import LoginForm, { ErrorInput } from "../components/LoginForm";
 
 function LoginPage() {
+  // Local State
+  const [errorLoginInput, setErrorLoginInput] = useState<
+    ErrorInput | undefined
+  >();
+  // Global State
   const dispatch = useAppDispatch();
-  const isLogged = useAppSelector((state) => state.user.isLogged);
-  const { store } = useContext(ReactReduxContext);
-  let errorLoginInput = false;
+
   let username: string | undefined = "";
   const loginRef: MutableRefObject<HTMLInputElement | undefined> = useRef();
 
@@ -16,11 +19,10 @@ function LoginPage() {
     event.preventDefault();
     if (loginRef.current && loginRef.current.value !== "") {
       username = loginRef.current?.value;
-      if (username.length < 5) {
-        console.log("Dupa");
-
-        errorLoginInput = true;
-      }
+      setErrorLoginInput({
+        errorMsg:
+          username.length < 5 ? "Login should have at least 5 signs." : "",
+      });
     }
     return dispatch(authUser(username));
   };
@@ -28,12 +30,11 @@ function LoginPage() {
   return (
     <>
       <h1>Login Page</h1>
-      <br />
-      <form onSubmit={loginHandler}>
-        <input ref={loginRef} autoComplete="off" placeholder="type login" />
-        <p>{errorLoginInput ? "Login should have at least 5 signs." : ""}</p>
-        <input type="submit" value="Submit" />
-      </form>
+      <LoginForm
+        loginHandler={loginHandler}
+        loginRef={loginRef}
+        errorLoginInput={errorLoginInput}
+      />
     </>
   );
 }

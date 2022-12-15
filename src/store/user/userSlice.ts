@@ -13,34 +13,16 @@ const userSlice = createSlice({
   reducers: {
     loginUser(state, action: PayloadAction<boolean>) {
       state.isLogged = action.payload;
+      state.id = 1; // Fake User ID
     },
     logoutUser(state, action: PayloadAction<boolean>) {
       state.isLogged = action.payload;
+      state.id = -1; // Fake Guest ID
+    },
+    addMeme(state, action: PayloadAction<string>) {
+      state.userMemes.push(action.payload);
     },
   },
 });
 
 export default userSlice;
-
-/*
-export const reducer = (
-  state: any = DEFAULT_ROOT_STATE,
-  action: any
-): IRootState => {
-  switch (action.type) {
-    case USER_ACTION_TYPES.LOGIN:
-      console.log(state.user);
-      return {
-        ...state,
-        user: {
-          isLogged: checkUsername(action.payload),
-          userMemes: state.user.userMemes,
-        },
-      };
-    case USER_ACTION_TYPES.LOGOUT:
-      return { ...state, user: { isLogged: false } };
-    default:
-      return { ...state };
-  }
-};
-*/

@@ -1,8 +1,8 @@
 import userSlice from "./userSlice";
 import { AnyAction, ThunkAction } from "@reduxjs/toolkit";
 import { RootState } from "../index";
-import { UserModel } from "../../models/userModel";
 import userService from "../../service/userService";
+import { getCatUrl } from "../../service/CatApi.ts";
 
 export const userActions = userSlice.actions;
 
@@ -22,12 +22,24 @@ export const authUser = (
 };
 
 export const deAuthUser = (
-  login: string
+  id: number
 ): ThunkAction<void, RootState, unknown, AnyAction> => {
   return async (dispatch, getState) => {
     if (getState().user.isLogged === true) {
-      const response: boolean = await userService.sendLogout(login);
+      const response: boolean = await userService.sendLogout(id);
       dispatch(userActions.loginUser(response));
     }
+  };
+};
+
+export const getRandomCat = (): ThunkAction<
+  void,
+  RootState,
+  unknown,
+  AnyAction
+> => {
+  return async (dispatch, getState) => {
+    const response: string = await getCatUrl();
+    dispatch(userActions.addMeme(response));
   };
 };

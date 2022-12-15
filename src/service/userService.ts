@@ -5,7 +5,7 @@ export default {
     });
     return response;
   },
-  async sendLogout(login: string): Promise<boolean> {
+  async sendLogout(id: number): Promise<boolean> {
     // Fake logout on the server
     return await new Promise((res, rej) => res(false));
   },
