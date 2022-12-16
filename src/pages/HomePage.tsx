@@ -1,22 +1,32 @@
 import { Button, Grid, Typography } from "@mui/material";
-import Meme from "../components/Meme";
 import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
-import { getRandomCat } from "../store/user/userActions";
+import { setRandomCat, userActions } from "../store/user/userActions";
+import PictureForm from "../components/PictureForm";
+import { getCatUrl } from "../service/CatApi.ts";
+import { MemeModel } from "../models/memeModel";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
 
   const isGuest = !useAppSelector((state) => state.user.isLogged);
   const memesCount = useAppSelector((state) => state.user.userMemes.length);
-  const lastGeneratedMeme = useAppSelector(
-    (state) => state.user.userMemes[memesCount - 1]
-  );
+  const lastGeneratedMeme = useAppSelector((state) => state.user.temporaryMeme);
   const memeLimit: number = 3;
   const isMemeLimitAchieved: boolean = isGuest && memesCount >= memeLimit;
 
-  const getCatHandler = (event: any) => {
+  const getCatHandler = async (event: any) => {
     event.preventDefault();
-    return dispatch(getRandomCat());
+    const catUrl: string = await getCatUrl();
+    const meme: MemeModel = { memeUrl: catUrl };
+    return dispatch(setRandomCat(meme));
+  };
+
+  const savePictureHandler = (event: any) => {
+    event.preventDefault();
+    const memeUrl: string = event.target.memeUrl?.value;
+    const memeDescription: string = event.target.memeDescription?.value;
+    dispatch(setRandomCat({ memeUrl: "" }));
+    return dispatch(userActions.addMeme({ memeUrl, memeDescription }));
   };
 
   return (
@@ -36,8 +46,11 @@ const HomePage = () => {
           </Button>
         )}
       </Grid>
-      <Grid item md={4}>
-        <Meme src={lastGeneratedMeme} />
+      <Grid item md={6}>
+        <PictureForm
+          savePictureHandler={savePictureHandler}
+          meme={lastGeneratedMeme}
+        />
       </Grid>
     </Grid>
   );

@@ -23,7 +23,8 @@ function LoginPage() {
         username?.length < 5 ? "Login should have at least 5 signs." : "";
       setErrorLoginInput(errorMsg);
     }
-    return dispatch(authUser(username));
+
+    dispatch(authUser(username));
   };
 
   return (
@@ -33,7 +34,7 @@ function LoginPage() {
       </Grid>
       <Grid item xs={12}>
         <LoginForm
-          loginHandler={loginHandler}
+          savePictureHandler={loginHandler}
           loginRef={loginRef}
           errorMsg={errorLoginInput}
         />

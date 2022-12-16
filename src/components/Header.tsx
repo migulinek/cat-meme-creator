@@ -10,7 +10,7 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const logOutHandler = () => {
     if (isLogged) {
-      return dispatch(deAuthUser(userId));
+      dispatch(deAuthUser(userId));
     }
   };
 

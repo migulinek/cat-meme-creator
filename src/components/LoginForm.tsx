@@ -1,7 +1,7 @@
 import { Box, Button, FormControl, TextField } from "@mui/material";
 
 export interface LoginFormInterface {
-  loginHandler: (event: any) => void;
+  savePictureHandler: (event: any) => void;
   loginRef: any;
   errorMsg: string;
 }
@@ -9,7 +9,7 @@ export interface LoginFormInterface {
 const LoginForm = (props: LoginFormInterface) => {
   return (
     <>
-      <form onSubmit={props.loginHandler}>
+      <form onSubmit={props.savePictureHandler}>
         <FormControl>
           <Box mt={3}>
             <TextField

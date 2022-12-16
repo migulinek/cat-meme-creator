@@ -2,7 +2,7 @@ import userSlice from "./userSlice";
 import { AnyAction, ThunkAction } from "@reduxjs/toolkit";
 import { RootState } from "../index";
 import userService from "../../service/userService";
-import { getCatUrl } from "../../service/CatApi.ts";
+import { MemeModel } from "../../models/memeModel";
 
 export const userActions = userSlice.actions;
 
@@ -32,14 +32,19 @@ export const deAuthUser = (
   };
 };
 
-export const getRandomCat = (): ThunkAction<
-  void,
-  RootState,
-  unknown,
-  AnyAction
-> => {
+export const setRandomCat = (
+  meme: MemeModel
+): ThunkAction<void, RootState, unknown, AnyAction> => {
   return async (dispatch, getState) => {
-    const response: string = await getCatUrl();
-    dispatch(userActions.addMeme(response));
+    dispatch(userActions.setTemporaryMeme(meme));
+  };
+};
+
+export const addMeme = (
+  meme: MemeModel
+): ThunkAction<void, RootState, unknown, AnyAction> => {
+  return async (dispatch, getState) => {
+    dispatch(userActions.addMeme(meme));
+    dispatch(userActions.setTemporaryMeme({ memeUrl: "" }));
   };
 };
