@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Button, Typography } from "@mui/material";
 import Meme from "../components/Meme";
 import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
 import { getRandomCat } from "../store/user/userActions";
@@ -21,16 +21,16 @@ const HomePage = () => {
 
   return (
     <div className="container home-page">
-      <h1>Home Page</h1>
+      <Typography variant="h3">Home Page</Typography>
       {isMemeLimitAchieved && (
         <p>
           You've already genereted 3 memes. To create more you have to log in.
         </p>
       )}
       {!isMemeLimitAchieved && (
-        <button className="btn" onClick={getCatHandler}>
+        <Button variant="contained" onClick={getCatHandler}>
           GET SOME CAT
-        </button>
+        </Button>
       )}
       <Meme src={lastGeneratedMeme} />
     </div>

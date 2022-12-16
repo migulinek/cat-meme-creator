@@ -1,15 +1,19 @@
+import { Container, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import "./Page404.scss";
 
 const Page404 = () => {
   return (
-    <div className="page-404">
-      <h1>404</h1>
-      <p>Back to</p>
-      <Link to="/">
-        <button className="btn small">Home Page</button>
-      </Link>
-    </div>
+    <>
+      <Container sx={{ textAlign: "center" }}>
+        <Typography variant="h3">404</Typography>
+        <p>Back to</p>
+        <Link to="/">
+          <Button size="small" variant="contained">
+            Home Page
+          </Button>
+        </Link>
+      </Container>
+    </>
   );
 };
 

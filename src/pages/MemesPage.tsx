@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import Meme from "../components/Meme";
 import { useAppSelector } from "../hooks/redux-hooks";
 
@@ -6,6 +7,7 @@ const MemesPage = () => {
 
   return (
     <>
+      <Typography variant="h3">Memes Page</Typography>
       {memes.map((memeUrl: string) => (
         <Meme key={memeUrl} src={memeUrl} />
       ))}

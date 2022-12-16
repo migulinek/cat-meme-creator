@@ -1,5 +1,3 @@
-import "./Meme.scss";
-
 const Meme = (props: any) => {
   return (
     <div className="meme-container">
