@@ -1,9 +1,17 @@
 import { UserModel } from "../../models/userModel";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { MemeModel } from "../../models/memeModel";
+import { LocationSearchingOutlined } from "@mui/icons-material";
+
+export interface MemeItem {
+  memeUrl: string;
+  memeDescription?: string;
+}
 
 const initialUserState: UserModel = {
   id: -1,
   isLogged: false,
+  temporaryMeme: { memeUrl: "" },
   userMemes: [],
 };
 
@@ -18,8 +26,12 @@ const userSlice = createSlice({
     logoutUser(state, action: PayloadAction<boolean>) {
       state.isLogged = action.payload;
       state.id = -1; // Fake Guest ID
+      state.userMemes = [];
     },
-    addMeme(state, action: PayloadAction<string>) {
+    setTemporaryMeme(state, action: PayloadAction<MemeModel>) {
+      state.temporaryMeme = action.payload;
+    },
+    addMeme(state, action: PayloadAction<MemeModel>) {
       state.userMemes.push(action.payload);
     },
   },

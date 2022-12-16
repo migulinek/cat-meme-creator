@@ -1,10 +1,14 @@
-import "./Meme.scss";
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { MemeModel } from "../models/memeModel";
 
-const Meme = (props: any) => {
+const Meme = (props: { meme: MemeModel }) => {
   return (
-    <div className="meme-container">
-      <img src={props.src} />
-    </div>
+    <Card>
+      <CardContent>
+        <Typography variant="h5">{props.meme?.memeDescription}</Typography>
+      </CardContent>
+      <CardMedia component="img" image={props.meme?.memeUrl} />
+    </Card>
   );
 };
 

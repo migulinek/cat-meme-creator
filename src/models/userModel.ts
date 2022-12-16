@@ -1,5 +1,8 @@
+import { MemeModel } from "./memeModel";
+
 export interface UserModel {
   id: number;
   isLogged: boolean;
-  userMemes: Array<string>;
+  temporaryMeme: MemeModel;
+  userMemes: Array<MemeModel>;
 }
