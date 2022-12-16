@@ -1,8 +1,10 @@
+import { Card, CardMedia } from "@mui/material";
+
 const Meme = (props: any) => {
   return (
-    <div className="meme-container">
-      <img src={props.src} />
-    </div>
+    <Card>
+      <CardMedia component="img" image={props.src} />
+    </Card>
   );
 };
 

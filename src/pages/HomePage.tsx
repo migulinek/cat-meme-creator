@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import Meme from "../components/Meme";
 import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
 import { getRandomCat } from "../store/user/userActions";
@@ -20,20 +20,26 @@ const HomePage = () => {
   };
 
   return (
-    <div className="container home-page">
-      <Typography variant="h3">Home Page</Typography>
-      {isMemeLimitAchieved && (
-        <p>
-          You've already genereted 3 memes. To create more you have to log in.
-        </p>
-      )}
-      {!isMemeLimitAchieved && (
-        <Button variant="contained" onClick={getCatHandler}>
-          GET SOME CAT
-        </Button>
-      )}
-      <Meme src={lastGeneratedMeme} />
-    </div>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Typography variant="h3">Home Page</Typography>
+        {isMemeLimitAchieved && (
+          <p>
+            You've already genereted 3 memes. To create more you have to log in.
+          </p>
+        )}
+      </Grid>
+      <Grid item xs={12}>
+        {!isMemeLimitAchieved && (
+          <Button variant="contained" onClick={getCatHandler}>
+            GET SOME CAT
+          </Button>
+        )}
+      </Grid>
+      <Grid item md={4}>
+        <Meme src={lastGeneratedMeme} />
+      </Grid>
+    </Grid>
   );
 };
 

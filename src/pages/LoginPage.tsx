@@ -2,7 +2,7 @@ import { useAppDispatch } from "../hooks/redux-hooks";
 import { MutableRefObject, useRef, useState } from "react";
 import { authUser } from "../store/user/userActions";
 import LoginForm from "../components/LoginForm";
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 function LoginPage() {
   // Local State
@@ -27,14 +27,18 @@ function LoginPage() {
   };
 
   return (
-    <>
-      <Typography variant="h3">Login Page</Typography>
-      <LoginForm
-        loginHandler={loginHandler}
-        loginRef={loginRef}
-        errorMsg={errorLoginInput}
-      />
-    </>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Typography variant="h3">Login Page</Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <LoginForm
+          loginHandler={loginHandler}
+          loginRef={loginRef}
+          errorMsg={errorLoginInput}
+        />
+      </Grid>
+    </Grid>
   );
 }
 

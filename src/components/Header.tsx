@@ -1,4 +1,5 @@
-import { AppBar, Box, Button, Container } from "@mui/material";
+import { AppBar, Box, Button } from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
 import { deAuthUser } from "../store/user/userActions";
@@ -31,8 +32,11 @@ const Header = () => {
         </Box>
         <Box>
           <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Link to="/">
+              <HomeIcon color="primary" sx={{ paddingTop: "3px" }} />
+            </Link>
             <Link to={isLogged ? "" : "login"} onClick={logOutHandler}>
-              <Box>
+              <Box ml={1}>
                 <Button variant="contained" size="small">
                   {isLogged ? "Sign out" : "Sign in"}
                 </Button>

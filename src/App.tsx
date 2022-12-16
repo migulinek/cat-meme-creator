@@ -5,13 +5,14 @@ import LoginPage from "./pages/LoginPage";
 import MemesPage from "./pages/MemesPage";
 import Page404 from "./pages/Page404";
 import { useAppSelector } from "./hooks/redux-hooks";
+import { Container } from "@mui/material";
 
 function App() {
   // Global State
   const isLogged = useAppSelector((state) => state.user.isLogged);
 
   return (
-    <div className="container">
+    <Container>
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -22,7 +23,7 @@ function App() {
         <Route path="memes" element={<MemesPage />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
-    </div>
+    </Container>
   );
 }
 
